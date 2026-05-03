@@ -1,0 +1,66 @@
+MEMBRANE — x402-MEM-P1
+Version: 1.0.0
+Status: FINAL SPECIFICATION (NON-MUTATING)
+
+Purpose:
+The membrane is the sole executable boundary between external agents
+and the immutable x402 pillars. It enforces payment, validates access,
+routes requests, and prevents parasitic behavior.
+
+Constant:
+The membrane is the only component of the x402 protocol that executes
+logic. All pillars remain static, inert, and non-executable.
+
+Responsibilities:
+1. Validate x402 payment for each request.
+2. Enforce the correct fee for the target pillar.
+3. Reject any request with missing, invalid, expired, underpaid, or replayed payment.
+4. Route the request to the correct pillar endpoint.
+5. Return the pillar’s raw verdict without modification.
+6. Expose no free execution surface.
+
+Routing Table:
+- /identity → x402-ID-P1 (fee: $0.005)
+- /schema  → x402-SCHEMA-P1 (fee: $0.001)
+- /arb     → x402-ARB-P1 (fee: $0.02)
+
+Payment Enforcement:
+For every request:
+1. Extract payment token.
+2. Verify token authenticity.
+3. Verify token freshness.
+4. Verify token amount matches the exact pillar fee.
+5. Verify token has not been replayed.
+6. If any check fails:
+   - Return: PAYMENT_REQUIRED
+   - Do not call the pillar.
+
+Execution Rules:
+- The membrane does not modify pillar inputs.
+- The membrane does not modify pillar outputs.
+- The membrane does not infer, repair, or transform data.
+- The membrane does not perform arbitration, schema validation, or identity checks.
+- The membrane only enforces payment and routes requests.
+
+Security Invariants:
+- No free endpoints.
+- No public compute.
+- No fallback routes.
+- No dynamic pricing.
+- No negotiation.
+- No contextual exceptions.
+- No execution outside the routing table.
+
+Parasitic Agent Immunity:
+- Any request without valid payment is rejected.
+- Any attempt to bypass the membrane is invalid.
+- Any attempt to access pillars directly is invalid.
+- Any attempt to replay payment tokens is invalid.
+
+Mutability:
+- This document is an immutable protocol artifact.
+- Any change MUST be published as:
+  - MEMBRANE — x402-MEM-P2 (or higher)
+- x402-MEM-P1 MUST remain forever unchanged.
+
+End of Membrane Specification.
