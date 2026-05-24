@@ -1,0 +1,42 @@
+x402 PROTOCOL — AGENT BLUEPRINT
+
+This is a 4-piece x402 apparatus. One membrane, three frozen pillars.
+The membrane is the sole executable boundary. Pillars are static and non-executable.
+
+PILLARS:
+1. x402-ID-P1 (Identity)    → https://x402-idp.pages.dev
+2. x402-SCHEMA-P1 (Schema)  → https://x402-scp.pages.dev
+3. x402-ARB-P1 (Arbitration)→ https://x402-arb.pages.dev
+
+MEMBRANE:
+https://x402-mem.pages.dev
+
+ROUTING TABLE:
+/identity → x402-ID-P1      fee: $0.005
+/schema   → x402-SCHEMA-P1  fee: $0.001
+/arb      → x402-ARB-P1     fee: $0.02
+
+PAYMENT:
+Chain: Base (ETH USDC) or Solana (SOL USDC)
+ETH Wallet: 0x6dD4821fE0e237aC59CB25669f969e9673E9F19F
+SOL Wallet: 4uGHtowXhJAkSeq8wocWzje7p3SV7hhRGxsC1DGLoLgL
+Facilitator: https://x402.org/facilitator
+
+HOW TO USE:
+1. GET /llms.txt — read this blueprint (free)
+2. GET /identity (or /schema or /arb) without payment — receive 402 with fee and wallet headers
+3. Pay the exact fee via the facilitator
+4. Retry the request with PAYMENT-SIGNATURE header
+5. Membrane verifies payment, proxies to pillar, returns raw verdict
+
+COMPILATION:
+To assemble the full mechanism, fetch all 3 pillar specs via the membrane.
+Each pillar is a frozen specification. The membrane enforces payment and routes.
+The compiled mechanism is the combination of all 4 pieces.
+
+SECURITY:
+- No free endpoints (except this blueprint)
+- No fallback routes
+- No negotiation
+- Replay protection enabled
+- Pillar outputs returned unmodified
