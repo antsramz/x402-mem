@@ -16,7 +16,7 @@ Responsibilities:
 2. Enforce the correct fee for the target pillar.
 3. Reject any request with missing, invalid, expired, underpaid, or replayed payment.
 4. Route the request to the correct pillar endpoint.
-5. Return the pillar’s raw verdict without modification.
+5. Return the pillar's raw verdict without modification.
 6. Expose no free execution surface.
 
 Routing Table:
@@ -56,6 +56,9 @@ Parasitic Agent Immunity:
 - Any attempt to bypass the membrane is invalid.
 - Any attempt to access pillars directly is invalid.
 - Any attempt to replay payment tokens is invalid.
+
+SDK:
+- Python client: https://github.com/antsramz/x402-client-python
 
 Mutability:
 - This document is an immutable protocol artifact.
